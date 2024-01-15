@@ -57,7 +57,7 @@ public class ForgotPasswordController {
 
         forgotPasswordRepository.save(forgotPasswordToken);
 
-        String emailLink = "http://localhost:9090/reset-password?token=" + forgotPasswordToken.getToken();
+        String emailLink = "http://monorail.proxy.rlwy.net:29780/reset-password?token=" + forgotPasswordToken.getToken();
 
         try {
             forgotPasswordService.sendEmail(user.getEmail(), "Password Reset Link", emailLink);
