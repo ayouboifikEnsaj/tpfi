@@ -28,7 +28,8 @@ public class Pharmacie {
     private List<PharmacieGarde> gardes;
 
 
-    @Lob
+
+    @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
     @OneToOne(fetch=FetchType.EAGER)
