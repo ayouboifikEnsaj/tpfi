@@ -34,20 +34,20 @@ public class PfApplication {
 //        };
 //    }
 
-    @Autowired
-    UserRepository userRepository;
+//    @Autowired
+//    UserRepository userRepository;
 
-    @Bean
-    CommandLineRunner init() {
-        return args -> {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            User user = new User();
-            user.setUsername("admin@admin");
-            user.setEmail("admin@findpharma.com");
-            user.setRole(Role.ADMIN);
-            user.setPassword(passwordEncoder.encode("admin@admin"));
-            userRepository.save(user);
-
-        };
-    }
+//    @Bean
+//    CommandLineRunner init() {
+//        return args -> {
+//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//            User user = new User();
+//            user.setUsername("admin@admin");
+//            user.setEmail("admin@findpharma.com");
+//            user.setRole(Role.ADMIN);
+//            user.setPassword(passwordEncoder.encode("admin@admin"));
+//            userRepository.save(user);
+//
+//        };
+//    }
 }
