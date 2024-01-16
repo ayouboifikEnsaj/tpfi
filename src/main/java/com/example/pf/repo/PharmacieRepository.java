@@ -53,8 +53,8 @@ public interface PharmacieRepository extends JpaRepository<Pharmacie, Integer> {
             + "AND pg.pharmacie = p "
             + "AND (pg.garde.type = :J ) "
             + "AND p.status = :APPROVEE "
-            + "AND pg.dateDebut <= :date AND pg.dateFin >= :date")
-    List<Pharmacie> getPharmaciesByZoneAndGardeJour(@Param("zone") Zone zone, @Param("J") GardeType J, @Param("APPROVEE") PharmacieStatus APPROVEE, @Param("date") Date date);
+            )
+    List<Pharmacie> getPharmaciesByZoneAndGardeJour(@Param("zone") Zone zone, @Param("J") GardeType J, @Param("APPROVEE") PharmacieStatus APPROVEE);
 
     @Query("select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v "
             + "Where p.zone = z AND v = z.ville "

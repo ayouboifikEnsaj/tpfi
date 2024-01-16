@@ -24,7 +24,7 @@ public class PharmacieDeGardeController {
     @GetMapping("/getActual/jour/{id}")
     public List<Pharmacie> getActualJour(@PathVariable(required = true) String id) {
       Zone s = repository2.findById(Integer.parseInt(id));
-        List<Pharmacie> tmp=repository1.getPharmaciesByZoneAndGardeJour(s,GardeType.J,PharmacieStatus.APPROVEE,new Date());
+        List<Pharmacie> tmp=repository1.getPharmaciesByZoneAndGardeJour(s,GardeType.J,PharmacieStatus.APPROVEE);
 
         return tmp;
     }
@@ -33,7 +33,7 @@ public class PharmacieDeGardeController {
     @GetMapping("/getActual/nuit/{id}")
     public List<Pharmacie> getActualNuit(@PathVariable(required = true) String id) {
         Zone s = repository2.findById(Integer.parseInt(id));
-        List<Pharmacie> tmp=repository1.getPharmaciesByZoneAndGardeJour(s,GardeType.N,PharmacieStatus.APPROVEE,new Date());
+        List<Pharmacie> tmp=repository1.getPharmaciesByZoneAndGardeJour(s,GardeType.N,PharmacieStatus.APPROVEE);
 
         return tmp;
     }

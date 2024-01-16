@@ -18,10 +18,7 @@ import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/pharmacien")
@@ -109,13 +106,17 @@ public class PharmacienController {
         Date date1 = dateFormat.parse(dateDebut);
         Date date2 = dateFormat.parse(dateFin);
         Date dateSysteme =new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateSysteme);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date yesterday = calendar.getTime();
         String pharmaciie = principal.getName();
         System.out.println("++++++++++pr++++++++");
         System.out.println(pharmaciie);
         int pharmacieID = userRepository.findByUsername(pharmaciie).getPharmacies().getId();
         List <PharmacieGarde> pharmacieGardesList=pharmacieGardeRepository.findPharmaciesGardeWithFutureEndDate(pharmacieID);
         System.out.println("cest Bien");
-        if(date1.before(dateSysteme) || date2.before(date1)){
+        if(date1.before(yesterday)|| date2.before(date1)){
 
 
             model.addAttribute("gardes", pharmacieGardeRepository.findPharmaciesGardeWithFutureEndDate(pharmacieID));

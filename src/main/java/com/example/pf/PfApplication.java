@@ -1,8 +1,7 @@
 package com.example.pf;
 
-import com.example.pf.entities.Pharmacie;
-import com.example.pf.entities.Role;
-import com.example.pf.entities.User;
+import com.example.pf.entities.*;
+import com.example.pf.repo.GardeRepository;
 import com.example.pf.repo.PharmacieRepository;
 import com.example.pf.repo.UserRepository;
 import com.example.pf.repo.ZoneRepository;
@@ -34,20 +33,48 @@ public class PfApplication {
 //        };
 //    }
 
-//    @Autowired
-//    UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    GardeRepository gardeRepository;
+    @Bean
+    CommandLineRunner init() {
+        return args -> {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            User user = new User();
+            user.setUsername("admin@admin");
+            user.setEmail("admin@findpharma.com");
+            user.setRole(Role.ADMIN);
+            user.setPassword(passwordEncoder.encode("admin@admin"));
+            Garde garde1 = new Garde();
+            garde1.setType(GardeType.J);
+            Garde garde2 = new Garde();
+            garde2.setType(GardeType.N);
+            List<Garde> gardes=gardeRepository.findAll();
+            try{
+                userRepository.save(user);
+            }catch (Exception e){
+                System.out.println("user exeist");
+            }
 
-//    @Bean
-//    CommandLineRunner init() {
-//        return args -> {
-//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//            User user = new User();
-//            user.setUsername("admin@admin");
-//            user.setEmail("admin@findpharma.com");
-//            user.setRole(Role.ADMIN);
-//            user.setPassword(passwordEncoder.encode("admin@admin"));
-//            userRepository.save(user);
-//
-//        };
-//    }
+            try{
+                if (gardes.isEmpty()){
+                    gardeRepository.save(garde1);
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                if(gardes.isEmpty()){
+                    gardeRepository.save(garde2);
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+        };
+    }
 }
